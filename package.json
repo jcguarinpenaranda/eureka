@@ -1,0 +1,22 @@
+{
+  "name": "eureka",
+  "version": "1.0.0",
+  "description": "Eureka is a multiplayer game server written in Nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcguarinpenaranda/eureka.git"
+  },
+  "author": "Juan Camilo Guarin P",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcguarinpenaranda/eureka/issues"
+  },
+  "homepage": "https://github.com/jcguarinpenaranda/eureka#readme",
+  "dependencies": {
+    "socket.io": "^1.5.0"
+  }
+}
