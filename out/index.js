@@ -13,7 +13,6 @@ var Main = (function () {
     Main.prototype.createServer = function () {
         var _this = this;
         this.app = express();
-        this.app.use(express.static('public'));
         this.server = this.app.listen(this.getPort(), function () {
             console.log('server started on port: ' + _this.getPort());
         });
