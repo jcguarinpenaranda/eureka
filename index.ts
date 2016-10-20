@@ -19,7 +19,7 @@ class Main {
 
     createServer(){
         this.app = express();
-        this.app.use(express.static('public'));
+        //this.app.use(express.static('public'));
         this.server = this.app.listen(this.getPort(), ()=>{
             console.log('server started on port: '+this.getPort());
         })
