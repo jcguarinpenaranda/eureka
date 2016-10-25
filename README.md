@@ -152,17 +152,13 @@ var me;
 // socket.on('me')....
 // socket.on('connected_clients')....
 
-socket.on('userEvent', function(userEvent){
-  
-  // let's receive a walking event
-  if(userEvent.eventName == 'walking'){
-
-    // please note that userEvent comes with the playerId 
-    // of the player who emitted this event.
-    // Now we are able to walk
-    walk(userEvent.playerId, userEvent.x, userEvent.y);
-  }
-})
+// here we receive the walking event sent by the
+// other client
+// Please note each event comes back with the 
+// playerid of the player who sent the event
+socket.on('walking', function(event){
+  walk(event.playerId, event.x, event.y); 
+});
 
 walk(playerId, x, y){
   console.log('look! i am walking!', playerId, x, y);
@@ -172,5 +168,21 @@ walk(playerId, x, y){
 
 ### When somebody disconnects from the server:
 
-
 #### > disconnected 
+This event is emmited from the server with the id of the disconnected player. 
+
+```js 
+var otherPlayers = []
+var me;
+
+// socket.on('presence' ).....
+// socket.on('me')....
+// socket.on('connected_clients')....
+// socket.on('walking')....
+
+socket.on('disconnected', function(playerId){
+  // playerId is the id of the disconnected
+  // player
+});
+
+```
