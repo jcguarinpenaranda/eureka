@@ -2,9 +2,11 @@
   "name": "eureka",
   "version": "1.0.0",
   "description": "Eureka is a multiplayer game server written in Nodejs",
-  "main": "index.js",
+  "main": "out/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc -w",
+    "start": "node out/index.js"
   },
   "repository": {
     "type": "git",
