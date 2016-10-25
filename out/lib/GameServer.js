@@ -8,6 +8,9 @@ var GameServer = (function () {
         this.io.sockets.on('connection', function (socket) {
             _this.onNewConnection(socket);
             _this.onGameEvents(socket);
+            socket.on('heartbeat', function () {
+                socket.emit('heartbeat', {});
+            });
             socket.on('disconnect', function () {
                 _this.onDisconnection(socket);
             });
@@ -15,7 +18,13 @@ var GameServer = (function () {
     }
     GameServer.prototype.onGameEvents = function (socket) {
         socket.on('userEvent', function (data) {
-            socket.broadcast.emit(data.eventName, data);
+            data.playerId = socket.id;
+            if (data.eventName) {
+                socket.broadcast.emit(data.eventName, data);
+            }
+            else {
+                socket.emit('error', { code: 1, message: "You must send eventName" });
+            }
         });
     };
     GameServer.prototype.onNewConnection = function (socket) {

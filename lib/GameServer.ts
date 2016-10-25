@@ -24,6 +24,10 @@ export class GameServer{
             
             // se asignan los eventos del juego
             this.onGameEvents(socket);
+
+            socket.on('heartbeat', ()=>{
+                socket.emit('heartbeat', {});
+            }); 
             
             // evento por defecto para la desconexión
             socket.on('disconnect', ()=>{
@@ -35,10 +39,14 @@ export class GameServer{
 
     onGameEvents(socket:any):void{
         // función básica para que se mueva el jugador
-        socket.on('userEvent', function(data:GameServerEventParams){
+        socket.on('userEvent', (data:GameServerEventParams)=>{
             data.playerId = socket.id;
-
-            socket.broadcast.emit(data.eventName,data);
+            //console.log('received event',data.eventName, 'from ',socket.id)
+            if(data.eventName){
+                socket.broadcast.emit(data.eventName,data);
+            } else {
+                socket.emit('error',{code:1, message:"You must send eventName"})
+            }
             //socket.broadcast.emit('userEvent',data);
         })
     }
