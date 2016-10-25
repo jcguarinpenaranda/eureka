@@ -6,7 +6,8 @@ export interface GameServerParams {
 }
 
 export interface GameServerEventParams {
-    eventName:string
+    eventName:string,
+    playerId?:string
 }
 
 export class GameServer{
@@ -35,7 +36,10 @@ export class GameServer{
     onGameEvents(socket:any):void{
         // función básica para que se mueva el jugador
         socket.on('userEvent', function(data:GameServerEventParams){
+            data.playerId = socket.id;
+
             socket.broadcast.emit(data.eventName,data);
+            //socket.broadcast.emit('userEvent',data);
         })
     }
 
